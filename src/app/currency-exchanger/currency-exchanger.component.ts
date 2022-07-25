@@ -1,8 +1,8 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Pipe, PipeTransform} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component} from '@angular/core';
 import {CurrencyExchangerService} from "./currency-exchanger-service";
 import {AutoDestroyService} from "../auto-destroy.service";
 import {catchError, debounceTime, distinctUntilChanged, EMPTY, filter, map, takeUntil, zip} from "rxjs";
-import {DateUtil} from "../utils/DateUtil";
+import {DateUtil} from '../utils/DateUtil';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
@@ -13,7 +13,6 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CurrencyExchangerComponent {
-
   availableCodes$ = this.currencyService.getCodes();
   MAX_DATE = DateUtil.getFormattedDate(new Date())
   convertedAmount: number = 0;

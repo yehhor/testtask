@@ -1,0 +1,52 @@
+<h1>
+  Currency exchanger
+</h1>
+
+<form novalidate [formGroup]="form" class="flex">
+  <div>
+
+    <label>
+      Select base currency
+      <select formControlName="baseCurrency">
+        <option *ngFor="let currency of availableCodes$ | async"
+                [disabled]="currency === targetCurrency"
+                [value]="currency">{{currency}}</option>
+      </select>
+    </label>
+
+    <label>
+      Select target currency
+      <select formControlName="targetCurrency" name="targetCurrency">
+        <option *ngFor="let currency of availableCodes$ | async"
+                [disabled]="currency === baseCurrency"
+                [value]="currency">{{currency}}</option>
+      </select>
+    </label>
+    <br>
+    <br>
+    <label>
+      Input amount
+      <!--      input should be validated-->
+      <input type="number"
+             min="0"
+             formControlName="amount">
+    </label>
+    <br>
+    <br>
+    <label>
+      Select date
+      <input type="date" [max]="MAX_DATE"
+             formControlName="selectedDate">
+    </label>
+
+    <button (click)="convert()">Convert</button>
+  </div>
+  <div>
+    <h1>Result</h1>
+    <div *ngIf="convertedAmount">
+      <h2>Rate is: {{rate}}</h2>
+      <h2>Date of the rate {{dateOfConversion}}</h2>
+      <h2>Converted amount {{convertedAmount}}</h2>
+    </div>
+  </div>
+</form>
